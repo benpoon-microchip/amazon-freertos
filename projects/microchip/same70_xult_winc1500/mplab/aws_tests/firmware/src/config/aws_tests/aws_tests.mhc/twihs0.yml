@@ -1,0 +1,32 @@
+format_version: v1.0
+type: UniqueComponent
+attributes: {id: twihs0}
+children:
+- type: Symbols
+  children:
+  - type: Comment
+    attributes: {id: TWIHS_CLK_EN_COMMENT}
+    children:
+    - type: Attributes
+      children:
+      - type: Boolean
+        attributes: {id: visible}
+        children:
+        - {type: Value, value: 'true'}
+- type: Attachments
+  children:
+  - type: DirectCapability
+    attributes: {id: TWIHS0_I2C}
+    children:
+    - type: Attributes
+      children:
+      - type: String
+        attributes: {id: targetComponentID}
+        children:
+        - {type: Value, value: atecc608_0}
+      - type: String
+        attributes: {id: targetAttachmentID}
+        children:
+        - {type: Value, value: ATECC608_DEP_PLIB_I2C}
+- type: ElementPosition
+  attributes: {x: '949', y: '186', id: twihs0}

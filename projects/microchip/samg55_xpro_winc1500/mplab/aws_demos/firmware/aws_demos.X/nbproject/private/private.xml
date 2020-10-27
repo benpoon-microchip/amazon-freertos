@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/D:/10_AFR/amazon-freertos/vendors/microchip/boards/samg55_xpro/ports/wifi/aws_wifi.c</file>
+            <file>file:/D:/10_AFR/amazon-freertos/projects/microchip/samg55_xpro_winc1500/mplab/aws_demos/firmware/src/app.c</file>
+            <file>file:/D:/10_AFR/amazon-freertos/demos/include/aws_clientcredential.h</file>
+            <file>file:/D:/10_AFR/amazon-freertos/vendors/microchip/boards/samg55_xpro/ports/wifi/iot_secure_sockets.c</file>
+            <file>file:/D:/10_AFR/amazon-freertos/projects/microchip/samg55_xpro_winc1500/mplab/aws_demos/firmware/src/main.c</file>
+        </group>
+    </open-files>
+</project-private>

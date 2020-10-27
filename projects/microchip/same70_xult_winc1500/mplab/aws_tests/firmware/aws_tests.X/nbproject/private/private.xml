@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/D:/H3_KIT/amazon-freertos/libraries/c_sdk/standard/mqtt/src/iot_mqtt_api.c</file>
+            <file>file:/D:/H3_KIT/amazon-freertos/projects/microchip/same70_xult_winc1500/mplab/aws_tests/firmware/src/main.c</file>
+            <file>file:/D:/H3_KIT/amazon-freertos/vendors/microchip/boards/same70_xult/aws_tests/config_files/iot_config.h</file>
+            <file>file:/D:/H3_KIT/amazon-freertos/libraries/c_sdk/standard/mqtt/test/system/iot_tests_mqtt_system.c</file>
+            <file>file:/D:/H3_KIT/amazon-freertos/libraries/c_sdk/standard/mqtt/src/iot_mqtt_network.c</file>
+            <file>file:/D:/H3_KIT/amazon-freertos/vendors/microchip/boards/same70_xult/ports/pkcs11/pkcs11_nvm.c</file>
+            <file>file:/D:/H3_KIT/amazon-freertos/projects/microchip/same70_xult_winc1500/mplab/aws_tests/firmware/src/config/aws_tests/driver/spi/src/drv_spi.c</file>
+            <file>file:/D:/H3_KIT/amazon-freertos/demos/dev_mode_key_provisioning/src/aws_dev_mode_key_provisioning.c</file>
+            <file>file:/D:/H3_KIT/amazon-freertos/libraries/abstractions/platform/freertos/iot_network_freertos.c</file>
+            <file>file:/D:/H3_KIT/amazon-freertos/vendors/microchip/boards/same70_xult/ports/wifi/iot_secure_sockets.c</file>
+            <file>file:/D:/H3_KIT/amazon-freertos/tests/include/aws_clientcredential.h</file>
+            <file>file:/D:/H3_KIT/amazon-freertos/libraries/freertos_plus/aws/greengrass/src/aws_helper_secure_connect.c</file>
+        </group>
+    </open-files>
+</project-private>
