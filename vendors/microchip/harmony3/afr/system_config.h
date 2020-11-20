@@ -61,7 +61,9 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 // *****************************************************************************
 
 #include "configuration.h"
-
+#ifdef PIC32_USE_RIO2_WIFI
+#include "aws_clientcredential.h"
+#endif
 #endif // SYSTEM_CONFIG_H
 /*******************************************************************************
  End of File
