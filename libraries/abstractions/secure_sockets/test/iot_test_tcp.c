@@ -769,6 +769,7 @@ static BaseType_t prvCheckTimeout( TickType_t xStartTime,
 
 TEST_GROUP_RUNNER( Full_TCP )
 {
+
     RUN_TEST_CASE( Full_TCP, AFQP_SOCKETS_CloseInvalidParams );
     RUN_TEST_CASE( Full_TCP, AFQP_SOCKETS_CloseWithoutReceiving );
     RUN_TEST_CASE( Full_TCP, AFQP_SOCKETS_ShutdownInvalidParams );
@@ -827,6 +828,7 @@ TEST_GROUP_RUNNER( Full_TCP )
         RUN_TEST_CASE( Full_TCP, AFQP_SECURE_SOCKETS_Threadsafe_SameSocketDifferentTasks );
         RUN_TEST_CASE( Full_TCP, AFQP_SECURE_SOCKETS_Threadsafe_DifferentSocketsDifferentTasks );
     #endif /* if ( tcptestSECURE_SERVER == 1 ) */
+
 }
 
 /*-------------------------------------------------------------------*/

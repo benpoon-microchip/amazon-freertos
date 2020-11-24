@@ -400,8 +400,9 @@ static inline CborError validate_floating_point(CborValue *it, CborType type, ui
     }
     cbor_assert(err == CborNoError);     /* can't fail */
 
-    r = fpclassify(val);
-    if (r == FP_NAN || r == FP_INFINITE) {
+    //r = fpclassify(val);
+    //if (r == FP_NAN || r == FP_INFINITE) {
+    if (0){
         if (flags & CborValidateFiniteFloatingPoint)
             return CborErrorExcludedValue;
         if (flags & CborValidateShortestFloatingPoint) {
@@ -410,10 +411,10 @@ static inline CborError validate_floating_point(CborValue *it, CborType type, ui
 #  ifndef CBOR_NO_HALF_FLOAT_TYPE
             if (type == CborFloatType)
                 return CborErrorOverlongEncoding;
-            if (r == FP_NAN && valf16 != 0x7e00)
-                return CborErrorImproperValue;
-            if (r == FP_INFINITE && valf16 != 0x7c00 && valf16 != 0xfc00)
-                return CborErrorImproperValue;
+            //if (r == FP_NAN && valf16 != 0x7e00)
+            //    return CborErrorImproperValue;
+            //if (r == FP_INFINITE && valf16 != 0x7c00 && valf16 != 0xfc00)
+            //    return CborErrorImproperValue;
 #  endif
         }
     }

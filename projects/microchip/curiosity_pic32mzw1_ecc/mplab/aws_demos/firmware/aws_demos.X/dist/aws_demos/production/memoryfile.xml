@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<project>                                  
+  <executable name="dist/aws_demos/production/aws_demos.X.production.elf">                 
+    <memory name="program">                 
+      <units>bytes</units>                 
+      <length>1049728</length>                 
+      <used>753070</used>                     
+      <free>296658</free>                     
+    </memory>                              
+    <memory name="data">              
+      <units>bytes</units>                 
+      <length>327680</length>                 
+      <used>233864</used>                     
+      <free>93816</free>                     
+    </memory>                              
+  </executable>                            
+</project>                                 

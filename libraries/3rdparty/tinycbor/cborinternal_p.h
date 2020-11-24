@@ -90,7 +90,7 @@ static inline double decode_half(unsigned short half)
     double val;
     if (exp == 0) val = ldexp(mant, -24);
     else if (exp != 31) val = ldexp(mant + 1024, exp - 25);
-    else val = mant == 0 ? INFINITY : NAN;
+    //else val = mant == 0 ? INFINITY : NAN;
     return half & 0x8000 ? -val : val;
 }
 #  endif

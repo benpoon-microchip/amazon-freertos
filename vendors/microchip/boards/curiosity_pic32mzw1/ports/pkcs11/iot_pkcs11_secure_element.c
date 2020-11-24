@@ -332,38 +332,48 @@ CK_RV pkcs11_config_cert( pkcs11_lib_ctx_ptr pLibCtx,
         return CKR_ARGUMENTS_BAD;
     }
 
-	if (pLabel->ulValueLen >= PKCS11_MAX_LABEL_SIZE)
-	{
-		return CKR_ARGUMENTS_BAD;
-	}
+    if (pLabel->ulValueLen >= PKCS11_MAX_LABEL_SIZE)
+    {
+        return CKR_ARGUMENTS_BAD;
+    }
 
-	if (!strncmp(pkcs11configLABEL_DEVICE_CERTIFICATE_FOR_TLS, (char*)pLabel->pValue, pLabel->ulValueLen))
-	{
-    	/* Slot 10 - Device Cert for Slot 0*/
+    if (!strncmp(pkcs11configLABEL_DEVICE_CERTIFICATE_FOR_TLS, (char*)pLabel->pValue, pLabel->ulValueLen))
+    {
+     /* Slot 10 - Device Cert for Slot 0*/
         pkcs11_config_init_cert(pObject, pLabel->pValue, pLabel->ulValueLen);
-    	pObject->slot = 10;
-    	pObject->class_type = CK_CERTIFICATE_CATEGORY_TOKEN_USER;
-    	pObject->size = g_cert_def_2_device.cert_template_size;
-    	pObject->data = &g_cert_def_2_device;
+        pObject->slot = 10;
+        pObject->class_type = CK_CERTIFICATE_CATEGORY_TOKEN_USER;
+#ifdef PIC32_USE_ECC            
+        pObject->flags |= PKCS11_OBJECT_FLAG_TRUST_TYPE;
+#else
+        pObject->size = g_cert_def_2_device.cert_template_size;
+        pObject->data = &g_cert_def_2_device;
+#endif
 #ifdef AMAZON_FREERTOS_ENABLE_UNIT_TESTS
-        pObject->flags = PKCS11_OBJECT_FLAG_DESTROYABLE;
+        //pObject->flags = PKCS11_OBJECT_FLAG_DESTROYABLE;
 #endif
 	}
-	else if (!strncmp(pkcs11configLABEL_JITP_CERTIFICATE, (char*)pLabel->pValue, pLabel->ulValueLen))
-	{
-    	/* Slot 12 - Signer Cert for Slot 10 */
-        pkcs11_config_init_cert(pObject, pLabel->pValue, pLabel->ulValueLen);
-    	pObject->slot = 12;
-    	pObject->class_type = CK_CERTIFICATE_CATEGORY_AUTHORITY;
-    	pObject->size = g_cert_def_1_signer.cert_template_size;
-    	pObject->data = &g_cert_def_1_signer;
+        else if (!strncmp(pkcs11configLABEL_JITP_CERTIFICATE, (char*)pLabel->pValue, pLabel->ulValueLen))
+        {
+            /* Slot 12 - Signer Cert for Slot 10 */
+            pkcs11_config_init_cert(pObject, pLabel->pValue, pLabel->ulValueLen);
+            pObject->slot = 12;
+            pObject->class_type = CK_CERTIFICATE_CATEGORY_AUTHORITY;
+#ifdef PIC32_USE_ECC 
+            pObject->flags |= PKCS11_OBJECT_FLAG_TRUST_TYPE;
+#else
+            pObject->size = g_cert_def_1_signer.cert_template_size;
+            pObject->data = &g_cert_def_1_signer;
+#endif
 #ifdef AMAZON_FREERTOS_ENABLE_UNIT_TESTS
-        pObject->flags = PKCS11_OBJECT_FLAG_DESTROYABLE;
+        //pObject->flags = PKCS11_OBJECT_FLAG_DESTROYABLE;
 #endif
 	}
 #ifdef pkcs11testLABEL_DEVICE_CERTIFICATE_FOR_TLS
     else if (!strncmp(pkcs11testLABEL_DEVICE_CERTIFICATE_FOR_TLS, (char*)pLabel->pValue, pLabel->ulValueLen))
     {
+        rv = CKR_ARGUMENTS_BAD;
+#if 0
         /* Slot 10 - Device Cert for Slot 0*/
         pkcs11_config_init_cert(pObject, pLabel->pValue, pLabel->ulValueLen);
         pObject->slot = 2;
@@ -371,6 +381,7 @@ CK_RV pkcs11_config_cert( pkcs11_lib_ctx_ptr pLibCtx,
         pObject->size = g_cert_def_3_test.cert_template_size;
         pObject->data = &g_cert_def_3_test;
         pObject->flags = PKCS11_OBJECT_FLAG_DESTROYABLE;
+#endif
     }
 #endif
     else
@@ -407,10 +418,13 @@ CK_RV pkcs11_config_key( pkcs11_lib_ctx_ptr pLibCtx,
         printf("[%s] log 2\r\n", __func__);
 		/* Slot 0 - Device Private Key */
         pkcs11_config_init_private(pObject, pLabel->pValue, pLabel->ulValueLen);
-		pObject->slot = 0;
+        pObject->slot = 0;
         pObject->config = &pSlot->cfg_zone;
+#ifdef PIC32_USE_ECC
+        pObject->flags |= PKCS11_OBJECT_FLAG_TRUST_TYPE;
+#endif
 #ifdef AMAZON_FREERTOS_ENABLE_UNIT_TESTS
-        pObject->flags = PKCS11_OBJECT_FLAG_DESTROYABLE;
+        //pObject->flags = PKCS11_OBJECT_FLAG_DESTROYABLE;
 #endif
     }
     else if (!strncmp(pkcs11configLABEL_DEVICE_PUBLIC_KEY_FOR_TLS, (char*)pLabel->pValue, pLabel->ulValueLen))
@@ -418,30 +432,39 @@ CK_RV pkcs11_config_key( pkcs11_lib_ctx_ptr pLibCtx,
         printf("[%s] log 3\r\n", __func__);
 		/* Slot 0 - Device Private Key */
         pkcs11_config_init_public(pObject, pLabel->pValue, pLabel->ulValueLen);
-		pObject->slot = 0;
+        pObject->slot = 0;
         pObject->config = &pSlot->cfg_zone;
+#ifdef PIC32_USE_ECC
+        pObject->flags |= PKCS11_OBJECT_FLAG_TRUST_TYPE;
+#endif
 #ifdef AMAZON_FREERTOS_ENABLE_UNIT_TESTS
-        pObject->flags = PKCS11_OBJECT_FLAG_DESTROYABLE;
+        //pObject->flags = PKCS11_OBJECT_FLAG_DESTROYABLE;
 #endif
     }
 #ifdef pkcs11testLABEL_DEVICE_PRIVATE_KEY_FOR_TLS
     else if (!strncmp(pkcs11testLABEL_DEVICE_PRIVATE_KEY_FOR_TLS, (char*)pLabel->pValue, pLabel->ulValueLen))
     {
+        rv = CKR_ARGUMENTS_BAD;
+#if 0
         /* Slot 0 - Device Private Key */
         pkcs11_config_init_private(pObject, pLabel->pValue, pLabel->ulValueLen);
         pObject->slot = 2;
         pObject->config = &pSlot->cfg_zone;
         pObject->flags = PKCS11_OBJECT_FLAG_DESTROYABLE;
+#endif
     }
 #endif
 #ifdef pkcs11testLABEL_DEVICE_PUBLIC_KEY_FOR_TLS
     else if (!strncmp(pkcs11testLABEL_DEVICE_PUBLIC_KEY_FOR_TLS, (char*)pLabel->pValue, pLabel->ulValueLen))
     {
+        rv = CKR_ARGUMENTS_BAD;
+#if 0
         /* Slot 0 - Device Private Key */
         pkcs11_config_init_public(pObject, pLabel->pValue, pLabel->ulValueLen);
         pObject->slot = 2;
         pObject->config = &pSlot->cfg_zone;
         pObject->flags = PKCS11_OBJECT_FLAG_DESTROYABLE;
+#endif
     }
 #endif
     else
