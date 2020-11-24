@@ -207,7 +207,6 @@ void vLoggingPrintf( const char * pcFormat,
          * not empty. */
         if( xLength > 0 )
         {
-             printf("%s",pcPrintString);
             /* Send the string to the logging task for IO. */
             if( xQueueSend( xQueue, &pcPrintString, loggingDONT_BLOCK ) != pdPASS )
             {
@@ -240,7 +239,7 @@ void vLoggingPrint( const char * pcMessage )
     if( pcPrintString != NULL )
     {
         strncpy( pcPrintString, pcMessage, xLength );
-        printf("%s", pcPrintString);
+
         /* Send the string to the logging task for IO. */
         if( xQueueSend( xQueue, &pcPrintString, loggingDONT_BLOCK ) != pdPASS )
         {

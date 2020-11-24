@@ -515,9 +515,9 @@ static CborError value_to_pretty(CborStreamFunction stream, void *out, CborValue
         }
 
         if ((flags & CborPrettyNumericEncodingIndicators) == 0) {
-            //r = fpclassify(val);
-            //if (r == FP_NAN || r == FP_INFINITE)
-            //    suffix = "";
+            r = fpclassify(val);
+            if (r == FP_NAN || r == FP_INFINITE)
+                suffix = "";
         }
 
         if (convertToUint64(val, &ival)) {

@@ -432,7 +432,7 @@ static int prvReadCertificateIntoContext( TLSContext_t * pxTlsContext,
                                                                                        &xTemplate,
                                                                                        1 );
     }
-    printf("[%s] log 2, xTemplate.ulValueLen = %d\r\n", __func__,  xTemplate.ulValueLen);
+
     /* Create a buffer for the certificate. */
     if( 0 == xResult )
     {
