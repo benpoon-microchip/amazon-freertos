@@ -46,7 +46,7 @@ ATCA_STATUS calib_random(ATCADevice device, uint8_t *rand_out)
     ATCAPacket packet;
     ATCACommand ca_cmd = NULL;
     ATCA_STATUS status = ATCA_GEN_FAIL;
-    printf("[%s] log1\r\n", __func__);
+
     do
     {
         if (device == NULL)
@@ -59,25 +59,21 @@ ATCA_STATUS calib_random(ATCADevice device, uint8_t *rand_out)
         // build an random command
         packet.param1 = RANDOM_SEED_UPDATE;
         packet.param2 = 0x0000;
-        printf("[%s] log2\r\n", __func__);
         if ((status = atRandom(ca_cmd, &packet)) != ATCA_SUCCESS)
         {
             ATCA_TRACE(status, "atRandom - failed");
             break;
         }
-        printf("[%s] log3\r\n", __func__);
         if ((status = atca_execute_command(&packet, device)) != ATCA_SUCCESS)
         {
             ATCA_TRACE(status, "calib_random - execution failed");
             break;
         }
-        printf("[%s] log4\r\n", __func__);
         if (packet.data[ATCA_COUNT_IDX] != RANDOM_RSP_SIZE)
         {
             status = ATCA_TRACE(ATCA_RX_FAIL, "Unexpected response size");
             break;
         }
-        printf("[%s] log5\r\n", __func__);
         if (rand_out)
         {
             memcpy(rand_out, &packet.data[ATCA_RSP_DATA_IDX], RANDOM_NUM_SIZE);

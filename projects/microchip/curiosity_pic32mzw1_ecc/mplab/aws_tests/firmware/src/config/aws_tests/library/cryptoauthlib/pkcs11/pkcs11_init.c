@@ -232,7 +232,6 @@ CK_RV pkcs11_init(CK_C_INITIALIZE_ARGS_PTR pInitArgs)
             return CKR_CANT_LOCK;
         }
     }
-    printf("[%s] log0\r\n", __func__);
     /* Initialize the Crypto device */
     lib_ctx->slots = pkcs11_slot_initslots(PKCS11_MAX_SLOTS_ALLOWED);
     if (lib_ctx->slots)
@@ -243,13 +242,11 @@ CK_RV pkcs11_init(CK_C_INITIALIZE_ARGS_PTR pInitArgs)
     /* Set up a slot with a configuration */
     rv = pkcs11_slot_config(0);
     
-    printf("[%s] log1, rv = %d\r\n", __func__, rv);
     if (CKR_OK == rv)
     {
         /* Attempt to Initialize the slot */
         rv = pkcs11_slot_init(0);
     }
-    printf("[%s] log2, rv = %d\r\n", __func__, rv);
     if (CKR_OK == rv)
     {
         lib_ctx->initialized = TRUE;

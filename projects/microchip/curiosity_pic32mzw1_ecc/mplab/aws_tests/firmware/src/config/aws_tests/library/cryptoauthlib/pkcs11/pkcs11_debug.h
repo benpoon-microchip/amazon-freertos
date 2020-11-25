@@ -29,7 +29,7 @@
 #define PKCS11_DEBUG_H_
 
 #include "pkcs11_config.h"
-#define PKCS11_DEBUG_ENABLE 1
+
 #if PKCS11_DEBUG_ENABLE
 const char * pkcs11_debug_get_ckr_name(CK_RV rv);
 void pkcs11_debug_attributes(CK_ATTRIBUTE_PTR pTemplate, CK_ULONG ulCount);

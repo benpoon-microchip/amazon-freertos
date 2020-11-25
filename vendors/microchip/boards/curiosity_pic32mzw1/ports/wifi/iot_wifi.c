@@ -372,7 +372,6 @@ static void WIFI_ConnectCallback(DRV_HANDLE handle, WDRV_PIC32MZW_ASSOC_HANDLE a
 WIFIReturnCode_t WIFI_On( void )
 {
     EventBits_t evBits;
-    printf("[%s] log1 \r\n", __func__);
     //WDRV_DBG_INFORM_MESSAGE(("\r\n[%s] In\r\n", __func__));
     
     if (SYS_STATUS_READY != WDRV_PIC32MZW_Status(sysObj.drvWifiPIC32MZW1))
@@ -387,7 +386,6 @@ WIFIReturnCode_t WIFI_On( void )
         return eWiFiFailure;
     }
     //WDRV_DBG_INFORM_MESSAGE(("\r\nWiFi Driver Open success...\r\n"));
-    printf("[%s] WiFi Driver Open success... \r\n", __func__);
     if (xPingReplyQueue == NULL)
         xPingReplyQueue = xQueueCreate( 10, sizeof( uint16_t ) );
 #if 0

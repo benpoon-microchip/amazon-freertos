@@ -158,7 +158,6 @@ static char gcPkcs11ThingNameCache[33];
 
 const char * pcPkcs11GetThingName(void)
 {
-    printf("[%s] log 1\r\n", __func__);
     if (0 == gcPkcs11ThingNameCache[0])
     {
         CK_RV xResult;
@@ -326,7 +325,7 @@ CK_RV pkcs11_config_cert( pkcs11_lib_ctx_ptr pLibCtx,
     
     (void)pLibCtx;
     (void)pSlot;
-    printf("[%s] log 1\r\n", __func__);
+
     if (!pObject || !pLabel)
     {
         return CKR_ARGUMENTS_BAD;
@@ -400,7 +399,7 @@ CK_RV pkcs11_config_key( pkcs11_lib_ctx_ptr pLibCtx,
 {
     CK_RV rv = CKR_OK;
 	size_t len;
-    printf("[%s] log 1\r\n", __func__);
+
     (void)pLibCtx;
 
     if (!pObject || !pLabel || !pSlot)
@@ -415,8 +414,7 @@ CK_RV pkcs11_config_key( pkcs11_lib_ctx_ptr pLibCtx,
 
     if (!strncmp(pkcs11configLABEL_DEVICE_PRIVATE_KEY_FOR_TLS, (char*)pLabel->pValue, pLabel->ulValueLen))
     {
-        printf("[%s] log 2\r\n", __func__);
-		/* Slot 0 - Device Private Key */
+        /* Slot 0 - Device Private Key */
         pkcs11_config_init_private(pObject, pLabel->pValue, pLabel->ulValueLen);
         pObject->slot = 0;
         pObject->config = &pSlot->cfg_zone;
@@ -429,8 +427,7 @@ CK_RV pkcs11_config_key( pkcs11_lib_ctx_ptr pLibCtx,
     }
     else if (!strncmp(pkcs11configLABEL_DEVICE_PUBLIC_KEY_FOR_TLS, (char*)pLabel->pValue, pLabel->ulValueLen))
     {
-        printf("[%s] log 3\r\n", __func__);
-		/* Slot 0 - Device Private Key */
+        /* Slot 0 - Device Private Key */
         pkcs11_config_init_public(pObject, pLabel->pValue, pLabel->ulValueLen);
         pObject->slot = 0;
         pObject->config = &pSlot->cfg_zone;
@@ -469,7 +466,6 @@ CK_RV pkcs11_config_key( pkcs11_lib_ctx_ptr pLibCtx,
 #endif
     else
     {
-        printf("[%s] log 4\r\n", __func__);
         rv = CKR_ARGUMENTS_BAD;
     }
 
@@ -481,7 +477,6 @@ CK_RV pkcs11_config_load_objects(pkcs11_slot_ctx_ptr pSlot)
 	pkcs11_object_ptr pObject;
 	CK_RV rv = CKR_OK;
     CK_ATTRIBUTE xLabel;
-    printf("[%s] log 1\r\n", __func__);
     pkcs11_config_interface(pSlot);
     if( CKR_OK == rv )
     {
@@ -588,7 +583,6 @@ CK_RV pkcs11_config_load_objects(pkcs11_slot_ctx_ptr pSlot)
 
 CK_RV pkcs11_config_interface(pkcs11_slot_ctx_ptr pSlot)
 {
-    printf("[%s] log 1\r\n", __func__);
     CK_RV rv = CKR_ARGUMENTS_BAD;
     if (pSlot)
     {
