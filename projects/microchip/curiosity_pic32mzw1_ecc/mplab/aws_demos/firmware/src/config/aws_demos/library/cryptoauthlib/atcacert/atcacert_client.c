@@ -180,12 +180,11 @@ int atcacert_write_cert(const atcacert_def_t* cert_def,
     atcacert_device_loc_t device_locs[16];
     size_t device_locs_count = 0;
     size_t i = 0;
-    printf("[%s] log1\r\n", __func__);
+    
     if (cert_def == NULL || cert == NULL)
     {
         return ATCACERT_E_BAD_PARAMS;
     }
-    printf("[%s] log2\r\n", __func__);
     ret = atcacert_get_device_locs(
         cert_def,
         device_locs,
@@ -194,7 +193,6 @@ int atcacert_write_cert(const atcacert_def_t* cert_def,
         ATCA_BLOCK_SIZE);
     if (ret != ATCACERT_E_SUCCESS)
     {
-        printf("[%s] log3\r\n", __func__);
         return ret;
     }
 
@@ -204,7 +202,6 @@ int atcacert_write_cert(const atcacert_def_t* cert_def,
         int start_block;
         static uint8_t data[416];
         int block;
-        printf("[%s] log4\r\n", __func__);
         if (device_locs[i].zone == DEVZONE_CONFIG)
         {
             continue;  // Cert data isn't written to the config zone, only read
@@ -217,10 +214,8 @@ int atcacert_write_cert(const atcacert_def_t* cert_def,
         ret = atcacert_get_device_data(cert_def, cert, cert_size, &device_locs[i], data);
         if (ret != ATCACERT_E_SUCCESS)
         {
-            printf("[%s] log5, ret = %d\r\n", __func__, ret);
             return ret;
         }
-        printf("[%s] log6\r\n", __func__);
         start_block = device_locs[i].offset / ATCA_BLOCK_SIZE;
         end_block = floor_div((int)(device_locs[i].offset + device_locs[i].count) - 1, ATCA_BLOCK_SIZE);
         for (block = start_block; block <= end_block; block++)
@@ -234,12 +229,10 @@ int atcacert_write_cert(const atcacert_def_t* cert_def,
                 ATCA_BLOCK_SIZE);
             if (ret != ATCA_SUCCESS)
             {
-                printf("[%s] log7\r\n", __func__);
                 return ret;
             }
         }
     }
-    printf("[%s] log8\r\n", __func__);
     return ATCACERT_E_SUCCESS;
 }
 

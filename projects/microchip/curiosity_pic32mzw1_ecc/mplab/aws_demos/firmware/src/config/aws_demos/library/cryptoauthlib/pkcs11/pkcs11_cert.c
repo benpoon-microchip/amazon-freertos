@@ -46,23 +46,18 @@
 static void pkcs11_cert_check_trust_data(pkcs11_object_ptr pObject)
 {
 #if defined(ATCA_TNGTLS_SUPPORT) || defined(ATCA_TNGLORA_SUPPORT) || defined(ATCA_TFLEX_SUPPORT)
-    printf("[%s] log1\r\n", __func__);
     if (PKCS11_OBJECT_FLAG_TRUST_TYPE & pObject->flags && !pObject->data)
     {
         const atcacert_def_t * cert_def = NULL;
         (void)tng_get_device_cert_def(&cert_def);
-        printf("[%s] log2\r\n", __func__);
         if (cert_def)
         {
-            printf("[%s] log3\r\n", __func__);
             if (CK_CERTIFICATE_CATEGORY_AUTHORITY == pObject->class_type)
             {
-                printf("[%s] log4\r\n", __func__);
                 pObject->data = (void*)cert_def->ca_cert_def;
             }
             else
             {
-                printf("[%s] log5\r\n", __func__);
                 pObject->data = (void*)cert_def;
             }
         }
@@ -167,7 +162,7 @@ static CK_RV pkcs11_cert_load(pkcs11_object_ptr pObject, CK_ATTRIBUTE_PTR pAttri
 CK_RV pkcs11_cert_get_encoded(CK_VOID_PTR pObject, CK_ATTRIBUTE_PTR pAttribute)
 {
     pkcs11_object_ptr obj_ptr = (pkcs11_object_ptr)pObject;
-    printf("[%s] In\r\n", __func__);
+
     if (obj_ptr)
     {
         pkcs11_cert_check_trust_data(obj_ptr);
@@ -535,21 +530,16 @@ CK_RV pkcs11_cert_x509_write(CK_VOID_PTR pObject, CK_ATTRIBUTE_PTR pAttribute)
     pkcs11_object_ptr obj_ptr = (pkcs11_object_ptr)pObject;
     ATCA_STATUS status;
 
-    printf("[%s] log1\r\n", __func__);
     if (!obj_ptr || !pAttribute || !pAttribute->pValue || pAttribute->type != CKA_VALUE)
     {
         return CKR_ARGUMENTS_BAD;
     }
-    printf("[%s] log2\r\n", __func__);
     if (atcab_is_ca_device(atcab_get_device_type()))
     {
-        printf("[%s] log3\r\n", __func__);
         status = atcacert_write_cert(obj_ptr->data, pAttribute->pValue, pAttribute->ulValueLen);
-        printf("[%s] log4\r\n", __func__);
     }
     else
     {
-        printf("[%s] log5\r\n", __func__);
 #if ATCA_TA_SUPPORT
         ATCADevice device = atcab_get_device();
         uint8_t handle_info[TA_HANDLE_INFO_SIZE];
@@ -573,12 +563,10 @@ CK_RV pkcs11_cert_x509_write(CK_VOID_PTR pObject, CK_ATTRIBUTE_PTR pAttribute)
 
     if (ATCA_SUCCESS == status)
     {
-        printf("[%s] log6\r\n", __func__);
         return CKR_OK;
     }
     else
     {
-        printf("[%s] log7\r\n", __func__);
         return CKR_GENERAL_ERROR;
     }
 }

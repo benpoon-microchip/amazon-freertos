@@ -381,60 +381,51 @@ CK_RV pkcs11_find_get_attribute(CK_SESSION_HANDLE hSession, CK_OBJECT_HANDLE hOb
     pkcs11_object_ptr pObject;
     CK_ULONG i;
     CK_RV rv;
-    printf("[%s] log1\r\n", __func__);
+    
     rv = pkcs11_init_check(&pLibCtx, FALSE);
     if (rv)
     {
         return rv;
     }
-    printf("[%s] log2\r\n", __func__);
+
     if (!pTemplate || !ulCount)
     {
         return CKR_ARGUMENTS_BAD;
     }
-    printf("[%s] log3\r\n", __func__);
     rv = pkcs11_session_check(&pSession, hSession);
     if (rv)
     {
         return rv;
     }
-    printf("[%s] log4\r\n", __func__);
     rv = pkcs11_object_check(&pObject, hObject);
     if (rv)
     {
         return rv;
     }
-    printf("[%s] log5\r\n", __func__);
     pkcs11_debug_attributes(pTemplate, ulCount);
 
     for (i = 0; i < ulCount; i++)
     {
-        printf("[%s] log51\r\n", __func__);
         pkcs11_attrib_model_ptr pAttribute = pkcs11_find_attrib((const pkcs11_attrib_model_ptr)pObject->attributes,
                                                                 pObject->count, &pTemplate[i]);
-        printf("[%s] log52\r\n", __func__);
         if (!pAttribute)
         {
             /* 2. Otherwise, if the specified value for the object is invalid(the object does not possess such an
                attribute), then the ulValueLen field in that triple is modified to hold the value CK_UNAVAILABLE_INFORMATION. */
-            printf("[%s] log6\r\n", __func__);
             pTemplate[i].ulValueLen = CK_UNAVAILABLE_INFORMATION;
             if (!rv)
             {
                 rv = CKR_ATTRIBUTE_TYPE_INVALID;
-                printf("[%s] log7\r\n", __func__);
             }
         }
         else if (pAttribute->func)
         {
-           printf("[%s] log53\r\n", __func__); 
             if (CKR_OK == pkcs11_lock_context(pLibCtx))
             {
                 /* Attribute function found so try to execute it */
                 CK_RV temp = pAttribute->func(pObject, &pTemplate[i]);
                 if (!rv)
                 {   
-                    printf("[%s] log8\r\n", __func__);
                     rv = temp;
                 }
                 pkcs11_unlock_context(pLibCtx);
@@ -442,7 +433,6 @@ CK_RV pkcs11_find_get_attribute(CK_SESSION_HANDLE hSession, CK_OBJECT_HANDLE hOb
         }
         else
         {
-            printf("[%s] log9\r\n", __func__);
             /* Assume if there is no function for the attribute we're keeping it private */
             pTemplate[i].ulValueLen = CK_UNAVAILABLE_INFORMATION;
             if (!rv)
@@ -451,7 +441,6 @@ CK_RV pkcs11_find_get_attribute(CK_SESSION_HANDLE hSession, CK_OBJECT_HANDLE hOb
             }
         }
     }
-    printf("[%s] log10\r\n", __func__);
     return rv;
 }
 

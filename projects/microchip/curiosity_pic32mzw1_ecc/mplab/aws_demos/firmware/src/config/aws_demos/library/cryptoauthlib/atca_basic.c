@@ -72,7 +72,6 @@ ATCA_STATUS atcab_version(char *ver_str)
 ATCA_STATUS atcab_init_ext(ATCADevice* device, ATCAIfaceCfg *cfg)
 {
     ATCA_STATUS status = ATCA_GEN_FAIL;
-    printf("[%s] log1\r\n", __func__);
     if (device)
     {
         // If a device has already been initialized, release it
@@ -87,7 +86,6 @@ ATCA_STATUS atcab_init_ext(ATCADevice* device, ATCAIfaceCfg *cfg)
         status = initATCADevice(cfg, &g_atcab_device);
         if (status != ATCA_SUCCESS)
         {
-            printf("[%s] log1, status = %d\r\n", __func__, status);
             return status;
         }
         *device = &g_atcab_device;
@@ -104,7 +102,6 @@ ATCA_STATUS atcab_init_ext(ATCADevice* device, ATCAIfaceCfg *cfg)
         {
             if ((status = calib_read_bytes_zone(*device, ATCA_ZONE_CONFIG, 0, ATCA_CHIPMODE_OFFSET, &(*device)->mCommands->clock_divider, 1)) != ATCA_SUCCESS)
             {
-                printf("[%s] log2, status = %d\r\n", __func__, status);
                 return status;
             }
             (*device)->mCommands->clock_divider &= ATCA_CHIPMODE_CLOCK_DIV_MASK;

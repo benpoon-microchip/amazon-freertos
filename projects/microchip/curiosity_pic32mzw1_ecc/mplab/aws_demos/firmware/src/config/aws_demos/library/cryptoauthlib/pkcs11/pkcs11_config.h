@@ -59,7 +59,7 @@
 /** Maximum number of total sessions allowed in the system - if using static
    memory then this many session contexts will be allocated */
 #ifndef PKCS11_MAX_SESSIONS_ALLOWED
-#define PKCS11_MAX_SESSIONS_ALLOWED     2
+#define PKCS11_MAX_SESSIONS_ALLOWED     12
 #endif
 
 /** Maximum number of cryptographic objects allowed to be cached */

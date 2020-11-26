@@ -523,7 +523,6 @@ CK_RV pkcs11_token_random(CK_SESSION_HANDLE hSession, CK_BYTE_PTR pRandomData, C
     uint8_t buf[32];
     CK_RV rv;
     
-    printf("[%s] log1\r\n", __func__);
     rv = pkcs11_init_check(&lib_ctx, FALSE);
     if (rv)
     {
@@ -540,20 +539,18 @@ CK_RV pkcs11_token_random(CK_SESSION_HANDLE hSession, CK_BYTE_PTR pRandomData, C
     {
         return rv;
     }
-    printf("[%s] log4\r\n", __func__);
+
     do
     {
         (void)pkcs11_lock_context(lib_ctx);
 
         status = atcab_random(buf);
-        printf("[%s] log5\r\n", __func__);
         (void)pkcs11_unlock_context(lib_ctx);
 
         if (status)
         {
             return CKR_DEVICE_ERROR;
         }
-        printf("[%s] log6\r\n", __func__);
         if (32 < ulRandomLen)
         {
             memcpy(pRandomData, buf, 32);
@@ -567,7 +564,6 @@ CK_RV pkcs11_token_random(CK_SESSION_HANDLE hSession, CK_BYTE_PTR pRandomData, C
         }
     }
     while (ulRandomLen);
-    printf("[%s] log7\r\n", __func__);
     return CKR_OK;
 }
 

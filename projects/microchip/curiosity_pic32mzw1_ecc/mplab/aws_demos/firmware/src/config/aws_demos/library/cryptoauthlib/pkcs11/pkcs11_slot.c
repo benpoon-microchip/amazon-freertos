@@ -187,7 +187,6 @@ CK_RV pkcs11_slot_init(CK_SLOT_ID slotID)
             status = atcab_init(ifacecfg);
         }
         while (retries-- && status);
-        printf("[%s] log1, status = %d\r\n", __func__, status);
     #ifdef ATCA_HAL_I2C
         if (ATCA_SUCCESS != status)
         {
@@ -205,7 +204,6 @@ CK_RV pkcs11_slot_init(CK_SLOT_ID slotID)
                 }
                 while (retries-- && status);
             }
-            printf("[%s] log2, status = %d\r\n", __func__, status);
         }
     #endif
 
@@ -224,7 +222,6 @@ CK_RV pkcs11_slot_init(CK_SLOT_ID slotID)
                 /* Only the classic cryptoauth devices require the configuration
                    to be loaded into memory */
                 status = atcab_read_config_zone((uint8_t*)&slot_ctx->cfg_zone);\
-                printf("[%s] log3, status = %d\r\n", __func__, status);
             }
             else
             {
@@ -241,7 +238,6 @@ CK_RV pkcs11_slot_init(CK_SLOT_ID slotID)
             slot_ctx->initialized = TRUE;
         }
     }
-    printf("[%s] log4, status = %d\r\n", __func__, status);
     return (ATCA_SUCCESS == status) ? CKR_OK : CKR_DEVICE_ERROR;
 }
 
