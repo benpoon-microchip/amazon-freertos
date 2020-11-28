@@ -376,7 +376,7 @@ WIFIReturnCode_t WIFI_On( void )
     
     if (SYS_STATUS_READY != WDRV_PIC32MZW_Status(sysObj.drvWifiPIC32MZW1))
     {
-        WDRV_DBG_INFORM_MESSAGE(("\r\n[%s] is not SYS_STATUS_READY...\r\n", __func__));
+        //WDRV_DBG_INFORM_MESSAGE(("\r\n[%s] is not SYS_STATUS_READY...\r\n", __func__));
         return eWiFiFailure;
     }
     
@@ -654,16 +654,10 @@ WIFIReturnCode_t WIFI_ConnectAP( const WIFINetworkParams_t * const pxNetworkPara
     
     //WDRV_PIC32MZW_BSSDisconnect(wdrvHandle);
     
-     if (WDRV_PIC32MZW_STATUS_OK == WDRV_PIC32MZW_BSSConnect(wdrvHandle, &g_wifiConfig.bssCtx, &g_wifiConfig.authCtx, WIFI_ConnectCallback))
-            {
-                WDRV_DBG_INFORM_MESSAGE(("success call api\r\n"));
-              
-            }
-            else
-            {
-                WDRV_DBG_ERROR_MESSAGE(("fail call api\r\n"));
-               
-            }
+    if (WDRV_PIC32MZW_STATUS_OK != WDRV_PIC32MZW_BSSConnect(wdrvHandle, &g_wifiConfig.bssCtx, &g_wifiConfig.authCtx, WIFI_ConnectCallback))
+    {
+        WDRV_DBG_ERROR_MESSAGE(("fail call api\r\n"));
+    }
     
       /* Wait for Wi-Fi connection to complete. */
     xTaskNotifyWait( WDRV_MAC_EVENT_CONNECT_DONE, WDRV_MAC_EVENT_CONNECT_DONE, &evBits, WIFI_MAC_CONNECT_TIMEOUT );

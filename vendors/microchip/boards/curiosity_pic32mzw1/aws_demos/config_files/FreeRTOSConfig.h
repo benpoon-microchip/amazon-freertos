@@ -27,6 +27,9 @@
 #define FREERTOS_CONFIG_H
 
 #include <xc.h>
+#if defined( __LANGUAGE_C__ )
+    #include "system/console/sys_console.h"
+#endif
 
 /*-----------------------------------------------------------
 * Application specific definitions.
@@ -144,7 +147,8 @@
     #define configPRINTF( X )          vLoggingPrintf X
 
 /* Map the logging task's printf to the board specific output function. */
-    #define configPRINT_STRING( x )    printf( x )
+    #define configPRINT_STRING( x )    SYS_CONSOLE_MESSAGE("\r" );  \
+                                                                        SYS_CONSOLE_MESSAGE( x )
 
 
 /* Sets the length of the buffers into which logging messages are written - so

@@ -593,21 +593,6 @@
               <itemPath>../../../../../../../libraries/3rdparty/pkcs11/pkcs11f.h</itemPath>
               <itemPath>../../../../../../../libraries/3rdparty/pkcs11/pkcs11t.h</itemPath>
             </logicalFolder>
-            <logicalFolder name="f5" displayName="tinycbor" projectFiles="true">
-              <itemPath>../../../../../../../libraries/3rdparty/tinycbor/cbor.h</itemPath>
-              <itemPath>../../../../../../../libraries/3rdparty/tinycbor/cborencoder.c</itemPath>
-              <itemPath>../../../../../../../libraries/3rdparty/tinycbor/cborencoder_close_container_checked.c</itemPath>
-              <itemPath>../../../../../../../libraries/3rdparty/tinycbor/cborerrorstrings.c</itemPath>
-              <itemPath>../../../../../../../libraries/3rdparty/tinycbor/cborinternal_p.h</itemPath>
-              <itemPath>../../../../../../../libraries/3rdparty/tinycbor/cborparser.c</itemPath>
-              <itemPath>../../../../../../../libraries/3rdparty/tinycbor/cborparser_dup_string.c</itemPath>
-              <itemPath>../../../../../../../libraries/3rdparty/tinycbor/cborpretty.c</itemPath>
-              <itemPath>../../../../../../../libraries/3rdparty/tinycbor/cborpretty_stdio.c</itemPath>
-              <itemPath>../../../../../../../libraries/3rdparty/tinycbor/cborvalidation.c</itemPath>
-              <itemPath>../../../../../../../libraries/3rdparty/tinycbor/compilersupport_p.h</itemPath>
-              <itemPath>../../../../../../../libraries/3rdparty/tinycbor/tinycbor-version.h</itemPath>
-              <itemPath>../../../../../../../libraries/3rdparty/tinycbor/utf8_p.h</itemPath>
-            </logicalFolder>
             <logicalFolder name="f6" displayName="tinycrypt" projectFiles="true">
               <logicalFolder name="f1" displayName="asn1" projectFiles="true">
                 <itemPath>../../../../../../../libraries/3rdparty/tinycrypt/asn1/asn1.h</itemPath>
@@ -1554,7 +1539,7 @@
         <property key="use-cci" value="false"/>
         <property key="use-iar" value="false"/>
         <property key="use-indirect-calls" value="false"/>
-        <appendMe value="-std=gnu99"/>
+        <appendMe value="-std=gnu99 -fgnu89-inline"/>
       </C32>
       <C32-AR>
         <property key="additional-options-chop-files" value="false"/>
