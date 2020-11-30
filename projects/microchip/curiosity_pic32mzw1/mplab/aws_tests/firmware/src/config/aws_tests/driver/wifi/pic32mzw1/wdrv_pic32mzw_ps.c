@@ -137,16 +137,16 @@ WDRV_PIC32MZW_STATUS WDRV_PIC32MZW_PowerSaveModeSet
     /* Finally, set the powersave mode */
     DRV_PIC32MZW_MultiWIDAddValue(&wids, DRV_WIFI_WID_POWER_MANAGEMENT, pPowerSaveCfg->powerSaveMode);
 
-    critSect = OSAL_CRIT_Enter(OSAL_CRIT_TYPE_LOW);
+    //critSect = OSAL_CRIT_Enter(OSAL_CRIT_TYPE_LOW);
 
     /* Write the wids. */
     if (false == DRV_PIC32MZW_MultiWid_Write(&wids))
     {
-        OSAL_CRIT_Leave(OSAL_CRIT_TYPE_LOW, critSect);
+        //OSAL_CRIT_Leave(OSAL_CRIT_TYPE_LOW, critSect);
         return WDRV_PIC32MZW_STATUS_REQUEST_ERROR;
     }
 
-    OSAL_CRIT_Leave(OSAL_CRIT_TYPE_LOW, critSect);
+    //OSAL_CRIT_Leave(OSAL_CRIT_TYPE_LOW, critSect);
 
     return WDRV_PIC32MZW_STATUS_OK;
 }

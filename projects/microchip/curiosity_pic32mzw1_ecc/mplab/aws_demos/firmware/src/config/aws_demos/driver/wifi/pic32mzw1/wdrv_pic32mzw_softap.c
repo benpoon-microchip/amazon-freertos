@@ -188,12 +188,12 @@ WDRV_PIC32MZW_STATUS WDRV_PIC32MZW_APStart
     /* Set 11n enabled (1). */
     DRV_PIC32MZW_MultiWIDAddValue(&wids, DRV_WIFI_WID_11N_ENABLE, 1);
 
-    critSect = OSAL_CRIT_Enter(OSAL_CRIT_TYPE_LOW);
+    //critSect = OSAL_CRIT_Enter(OSAL_CRIT_TYPE_LOW);
 
     /* Write the wids. */
     if (false == DRV_PIC32MZW_MultiWid_Write(&wids))
     {
-        OSAL_CRIT_Leave(OSAL_CRIT_TYPE_LOW, critSect);
+        //OSAL_CRIT_Leave(OSAL_CRIT_TYPE_LOW, critSect);
         return WDRV_PIC32MZW_STATUS_CONNECT_FAIL;
     }
 
@@ -206,7 +206,7 @@ WDRV_PIC32MZW_STATUS WDRV_PIC32MZW_APStart
         pDcpt->pCtrl->assocInfoAP[i].peerAddress.valid = false;
     }
 
-    OSAL_CRIT_Leave(OSAL_CRIT_TYPE_LOW, critSect);
+    //OSAL_CRIT_Leave(OSAL_CRIT_TYPE_LOW, critSect);
 
     return WDRV_PIC32MZW_STATUS_OK;
 }

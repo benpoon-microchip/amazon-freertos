@@ -179,11 +179,11 @@ WDRV_PIC32MZW_STATUS WDRV_PIC32MZW_BSSFindFirst
     DRV_PIC32MZW_MultiWIDAddValue(&wids, DRV_WIFI_WID_BCAST_SSID, 0);
     DRV_PIC32MZW_MultiWIDAddValue(&wids, DRV_WIFI_WID_START_SCAN_REQ, 1);
 
-    critSect = OSAL_CRIT_Enter(OSAL_CRIT_TYPE_LOW);
+    //critSect = OSAL_CRIT_Enter(OSAL_CRIT_TYPE_LOW);
 
     if (false == DRV_PIC32MZW_MultiWid_Write(&wids))
     {
-        OSAL_CRIT_Leave(OSAL_CRIT_TYPE_LOW, critSect);
+        //OSAL_CRIT_Leave(OSAL_CRIT_TYPE_LOW, critSect);
         return WDRV_PIC32MZW_STATUS_REQUEST_ERROR;
     }
 
@@ -191,7 +191,7 @@ WDRV_PIC32MZW_STATUS WDRV_PIC32MZW_BSSFindFirst
     pDcpt->pCtrl->scanIndex         = 0;
     pDcpt->pCtrl->pfBSSFindNotifyCB = pfNotifyCallback;
 
-    OSAL_CRIT_Leave(OSAL_CRIT_TYPE_LOW, critSect);
+    //OSAL_CRIT_Leave(OSAL_CRIT_TYPE_LOW, critSect);
 
     return WDRV_PIC32MZW_STATUS_OK;
 }

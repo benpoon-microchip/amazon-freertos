@@ -466,13 +466,13 @@ WDRV_PIC32MZW_STATUS WDRV_PIC32MZW_AuthCtxSetPersonal
 )
 {
     DRV_PIC32MZW_11I_MASK dot11iInfo;
-    printf("[%s] log1, password = %s, len = %d\r\n", __func__, pPassword, size);
+
     /* Ensure authentication context is valid. */
     if (NULL == pAuthCtx)
     {
         return WDRV_PIC32MZW_STATUS_INVALID_ARG;
     }
-    printf("[%s] log2\r\n", __func__);
+
     if (WDRV_PIC32MZW_AUTH_TYPE_DEFAULT == authType)
     {
 #ifdef WDRV_PIC32MZW_WPA3_SUPPORT
@@ -483,7 +483,7 @@ WDRV_PIC32MZW_STATUS WDRV_PIC32MZW_AuthCtxSetPersonal
         authType = WDRV_PIC32MZW_AUTH_TYPE_WPA2_PERSONAL;
 #endif
     }
-    printf("[%s] log3\r\n", __func__);
+
     dot11iInfo = DRV_PIC32MZW_Get11iMask(authType, WDRV_PIC32MZW_AUTH_MOD_NONE);
 
     /* Ensure the requested auth type is valid for Personal authentication. */
@@ -491,13 +491,13 @@ WDRV_PIC32MZW_STATUS WDRV_PIC32MZW_AuthCtxSetPersonal
     {
         return WDRV_PIC32MZW_STATUS_INVALID_ARG;
     }
-    printf("[%s] log4\r\n", __func__);
+
     /* Ensure the password is valid. */
     if (false == _DRV_PIC32MZW_PersonalKeyIsValid(pPassword, size, dot11iInfo))
     {
         return WDRV_PIC32MZW_STATUS_INVALID_ARG;
     }
-    printf("[%s] log5\r\n", __func__);
+
     /* Set authentication type. */
     pAuthCtx->authType = authType;
 
@@ -513,8 +513,7 @@ WDRV_PIC32MZW_STATUS WDRV_PIC32MZW_AuthCtxSetPersonal
             0,
             sizeof(pAuthCtx->authInfo.personal.password));
     memcpy(pAuthCtx->authInfo.personal.password, pPassword, size);
-    
-    printf("[%s] log6\r\n", __func__);
+
     return WDRV_PIC32MZW_STATUS_OK;
 }
 
