@@ -299,30 +299,29 @@ void SYS_Initialize ( void* data )
 
   
     CLK_Initialize();
-	SYS_PMU_MLDO_TRIM();
+    SYS_PMU_MLDO_TRIM();
 
     /* Configure Wait States */
     PRECONbits.PFMWS = 5;
 
 
 
-	GPIO_Initialize();
+    GPIO_Initialize();
 
-	BSP_Initialize();
+    BSP_Initialize();
     NVM_Initialize();
-    
+
     CORETIMER_Initialize();
-	UART1_Initialize();
+    UART1_Initialize();
 
-	UART2_Initialize();
+    UART2_Initialize();
 
-	RNG_Initialize();
-        I2C2_Initialize();
-     printf("Test1\r\n");
+    RNG_Initialize();
+    I2C2_Initialize();
+
     /* Initialize the PIC32MZW1 Driver */
     CRYPT_RNG_Initialize(wdrvPIC32MZW1InitData.pCryptRngCtx);
     sysObj.drvWifiPIC32MZW1 = WDRV_PIC32MZW_Initialize(WDRV_PIC32MZW_SYS_IDX_0, (SYS_MODULE_INIT*)&wdrvPIC32MZW1InitData);
-     printf("Test3\r\n");
     
     SYS_CMD_Initialize((SYS_MODULE_INIT*)&sysCmdInit);
 

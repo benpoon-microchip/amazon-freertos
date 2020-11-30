@@ -2,6 +2,11 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/AFR/amazon-freertos/libraries/freertos_plus/standard/freertos_plus_tcp/source/portable/NetworkInterface/pic32mzw1_h3/NetworkInterface_wifi.c</file>
+            <file>file:/C:/AFR/amazon-freertos/libraries/freertos_plus/standard/freertos_plus_tcp/source/portable/NetworkInterface/pic32mzw1_h3/BufferAllocation_2.c</file>
+            <file>file:/C:/AFR/amazon-freertos/vendors/microchip/boards/curiosity_pic32mzw1/ports/pkcs11/iot_pkcs11_pal.c</file>
+            <file>file:/C:/AFR/amazon-freertos/vendors/microchip/boards/curiosity_pic32mzw1/ports/pkcs11/pkcs11_nvm.c</file>
+        </group>
     </open-files>
 </project-private>

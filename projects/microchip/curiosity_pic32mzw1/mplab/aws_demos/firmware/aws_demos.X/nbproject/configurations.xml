@@ -928,7 +928,6 @@
                                      displayName="pic32mzw1_h3"
                                      projectFiles="true">
                         <itemPath>../../../../../../../libraries/freertos_plus/standard/freertos_plus_tcp/source/portable/NetworkInterface/pic32mzw1_h3/BufferAllocation_2.c</itemPath>
-                        <itemPath>../../../../../../../libraries/freertos_plus/standard/freertos_plus_tcp/source/portable/NetworkInterface/pic32mzw1_h3/NetworkInterface_eth.c</itemPath>
                         <itemPath>../../../../../../../libraries/freertos_plus/standard/freertos_plus_tcp/source/portable/NetworkInterface/pic32mzw1_h3/NetworkInterface_wifi.c</itemPath>
                       </logicalFolder>
                     </logicalFolder>
@@ -999,9 +998,6 @@
                   </logicalFolder>
                 </logicalFolder>
                 <logicalFolder name="f2" displayName="ports" projectFiles="true">
-                  <logicalFolder name="f1" displayName="ota" projectFiles="true">
-                    <itemPath>../../../../../../../vendors/microchip/boards/curiosity_pic32mzw1/ports/ota/aws_ota_pal.c</itemPath>
-                  </logicalFolder>
                   <logicalFolder name="f2" displayName="pkcs11" projectFiles="true">
                     <itemPath>../../../../../../../vendors/microchip/boards/curiosity_pic32mzw1/ports/pkcs11/iot_pkcs11_pal.c</itemPath>
                     <itemPath>../../../../../../../vendors/microchip/boards/curiosity_pic32mzw1/ports/pkcs11/pkcs11_nvm.c</itemPath>
@@ -1337,7 +1333,7 @@
         <property key="post-instruction-scheduling" value="default"/>
         <property key="pre-instruction-scheduling" value="default"/>
         <property key="preprocessor-macros"
-                  value="WOLFSSL_IGNORE_FILE_WARN;HAVE_CONFIG_H;__free_rtos__;nPIC32_USE_ETHERNET;PIC32_USE_RIO2_WIFI"/>
+                  value="WOLFSSL_IGNORE_FILE_WARN;HAVE_CONFIG_H;__free_rtos__;PIC32_USE_RIO2_WIFI"/>
         <property key="strict-ansi" value="false"/>
         <property key="support-ansi" value="false"/>
         <property key="toplevel-reordering" value=""/>
@@ -1622,6 +1618,8 @@
         <property key="memories.programmemory" value="true"/>
         <property key="memories.programmemory.ranges" value="10000000-100fffff"/>
         <property key="poweroptions.powerenable" value="false"/>
+        <property key="programmerToGoFilePath"
+                  value="C:/AFR/amazon-freertos/projects/microchip/curiosity_pic32mzw1/mplab/aws_demos/firmware/aws_demos.X/debug/aws_demos/aws_demos_ptg"/>
         <property key="programmerToGoImageName" value="aws_demos_ptg"/>
         <property key="programoptions.donoteraseauxmem" value="false"/>
         <property key="programoptions.eraseb4program" value="true"/>

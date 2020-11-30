@@ -51,25 +51,9 @@ int main ( void )
                            tskIDLE_PRIORITY,
                             mainLOGGING_MESSAGE_QUEUE_LENGTH );
     
-    //xLoggingTaskInitialize( 4096,
-     //                       tskIDLE_PRIORITY,
-      //                      mainLOGGING_MESSAGE_QUEUE_LENGTH );
-    
-     
     /* Initialize all modules */
-    SYS_Initialize ( NULL );
-    
-    printf("Test is start1\r\n");
+    SYS_Initialize ( NULL );  
     vApplicationIPInit();
-    printf("Test is start2\r\n");
-    
-    
-   // while ( true )
-    //{
-     //   printf("Test is start8\r\n");
-      //  vTaskDelay(1000 / portTICK_PERIOD_MS);
-      //  vTaskStartScheduler();
-    //}
     
     while ( true )
     {
@@ -94,7 +78,6 @@ void vApplicationIPNetworkEventHook( eIPCallbackEvent_t eNetworkEvent )
     uint32_t ulIPAddress, ulNetMask, ulGatewayAddress, ulDNSServerAddress;
     char cBuffer[ 16 ];
     static BaseType_t xTasksAlreadyCreated = pdFALSE;
-    printf("[%s] In\r\n", __func__);
     /* If the network has just come up...*/
     if( eNetworkEvent == eNetworkUp )
     {
@@ -135,7 +118,7 @@ void vApplicationIPNetworkEventHook( eIPCallbackEvent_t eNetworkEvent )
 void vAssertCalled( const char * pcFile,
                     uint32_t ulLine )
 {
-    ///const uint32_t ulLongSleep = 1000UL;
+    const uint32_t ulLongSleep = 1000UL;
     volatile uint32_t ulBlockVariable = 0UL;
     volatile char * pcFileName = ( volatile char * ) pcFile;
     volatile uint32_t ulLineNumber = ulLine;
@@ -143,18 +126,18 @@ void vAssertCalled( const char * pcFile,
     ( void ) pcFileName;
     ( void ) ulLineNumber;
 
-    //configPRINTF( ( "vAssertCalled %s, %ld\n", pcFile, ( long ) ulLine ) );
+    configPRINTF( ( "vAssertCalled %s, %ld\n", pcFile, ( long ) ulLine ) );
     printf("vAssertCalled %s, %ld\n", pcFile, ( long ) ulLine);
     /* Setting ulBlockVariable to a non-zero value in the debugger will allow
      * this function to be exited. */
-    ///taskDISABLE_INTERRUPTS();
+    taskDISABLE_INTERRUPTS();
     {
         while( ulBlockVariable == 0UL )
         {
-            ///Sleep( ulLongSleep );
+            //Sleep( ulLongSleep );
         }
     }
-    ///taskENABLE_INTERRUPTS();
+    taskENABLE_INTERRUPTS();
 }
 /*******************************************************************************
  End of File

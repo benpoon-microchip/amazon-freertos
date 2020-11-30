@@ -60,14 +60,12 @@ volatile bool bTaskCompleted = false;
 // implementation
 void nvm_callback(uintptr_t context)
 {
-    //printf("[%s] log 1\r\n", __func__);
     bTaskCompleted=true;
 }
 
 
 bool AWS_UpperBootPage4Erase(uint32_t addr)
 {
-    printf("[%s] log 1\r\n", __func__);
     bool bResult=true;
     int i = 0;
     uint32_t phys_addr = KVA0_TO_KVA1(addr);
@@ -96,17 +94,16 @@ bool AWS_UpperBootPage4Erase(uint32_t addr)
 
 bool AWS_UpperBootWriteRow(const uint32_t ptrFlash, const uint32_t* rowData)
 {
-    //printf("[%s] log 1 ptrFlash = 0x%p\r\n", __func__, ptrFlash);
-    //printf("[%s] data = 0x%x 0x%x 0x%x 0x%x 0x%x 0x%x\r\n", __func__, rowData[0], rowData[1], rowData[2], rowData[3], rowData[4], rowData[5]);
     bool bResult=true;
-        /* Program a row of data */
-        bTaskCompleted=false;
-        while(NVM_IsBusy() == true);
-        NVM_RowWrite((uint32_t *)rowData, ptrFlash);
+    
+    /* Program a row of data */
+    bTaskCompleted=false;
+    while(NVM_IsBusy() == true);
+    NVM_RowWrite((uint32_t *)rowData, ptrFlash);
 
-        while(bTaskCompleted == false);
+    while(bTaskCompleted == false);
 
-        bTaskCompleted = false;
+    bTaskCompleted = false;
     bResult = (NVM_ErrorGet() == 0)?true:false;
     return bResult;
 }
@@ -114,20 +111,17 @@ bool AWS_UpperBootWriteRow(const uint32_t ptrFlash, const uint32_t* rowData)
 
 void AWS_UpperBootPage4ProtectionDisable(void)
 {
-    printf("[%s] log 1\r\n", __func__);
     // No Support now!!!
 }
 
 void AWS_UpperBootPage4ProtectionEnable(void)
 {
-    printf("[%s] log 1\r\n", __func__);
     // No Support now!!!
 }
 
 
 bool AWS_FlashProgramBlock(const uint8_t* address, const uint8_t* pData, uint32_t size)
 {
-    printf("[%s] log 1\r\n", __func__);
     uint32_t quad_buff[AWS_NVM_QUAD_SIZE / sizeof(uint32_t)];
 
     const uint8_t* start_quad = (const uint8_t*)((uint32_t)address & AWS_NVM_QUAD_MASK);    // quad to start with
@@ -197,7 +191,6 @@ bool AWS_FlashProgramBlock(const uint8_t* address, const uint8_t* pData, uint32_
 
 bool AWS_FlashEraseUpdateBank()
 {
-    printf("[%s] log 1\r\n", __func__);
     volatile uint32_t processorStatus;
     uint32_t operation = 6; // Upper Boot Region
     bool bResult=true;
@@ -254,7 +247,6 @@ bool AWS_NVM_QuadWordWrite(uint32_t * address,
                            uint32_t * data,
                             int nQuads )
 {
-    printf("[%s] log 1\r\n", __func__);
      bool bResult=true;
      int i;
      uint32_t flash_phys_addr = (uint32_t) address;
@@ -282,7 +274,6 @@ int mbedtls_hardware_poll( void * data,
                            size_t len,
                            size_t * olen )
 {
-    printf("[%s] log 1\r\n", __func__);
     ((void) data);
 
     union

@@ -138,20 +138,17 @@ CK_OBJECT_HANDLE PKCS11_PAL_SaveObject( CK_ATTRIBUTE_PTR pxLabel,
     CK_OBJECT_HANDLE xHandle = eInvalidHandle;
     const P11CertData_t * pCertFlash;
     P11CertData_t * pCertSave = 0;
-	uint32_t addr =  PKCS11_CERTIFICATE_SECTION_START_ADDRESS;
+    uint32_t addr =  PKCS11_CERTIFICATE_SECTION_START_ADDRESS;
     const P11KeyConfig_t * P11ConfigFlashPtr = ( const P11KeyConfig_t * ) KVA0_TO_KVA1(addr);
     P11KeyConfig_t * P11ConfigSavePtr = ( P11KeyConfig_t * ) KVA0_TO_KVA1( ( uint32_t ) &P11ConfigSave );
     
-    printf("[%s] log 1, datasize = %d\r\n", __func__, ulDataSize);
     if (ulDataSize <= pkcs11OBJECT_CERTIFICATE_MAX_SIZE)
     {
-        printf("[%s] log 101\r\n", __func__);
         /* Translate from the PKCS#11 label to local storage file name. */
         if( 0 == memcmp( pxLabel->pValue,
                          &pkcs11configLABEL_DEVICE_CERTIFICATE_FOR_TLS,
                          sizeof( pkcs11configLABEL_DEVICE_CERTIFICATE_FOR_TLS ) ) )
         {
-            printf("[%s] log 11\r\n", __func__);
             pCertSave = &P11ConfigSavePtr->xDeviceCertificate;
             pCertFlash = &P11ConfigFlashPtr->xDeviceCertificate;
             xHandle = eAwsDeviceCertificate;
@@ -160,7 +157,6 @@ CK_OBJECT_HANDLE PKCS11_PAL_SaveObject( CK_ATTRIBUTE_PTR pxLabel,
                               &pkcs11configLABEL_DEVICE_PRIVATE_KEY_FOR_TLS,
                               sizeof( pkcs11configLABEL_DEVICE_PRIVATE_KEY_FOR_TLS ) ) )
         {
-            printf("[%s] log 12\r\n", __func__);
             pCertSave = &P11ConfigSavePtr->xDeviceKey;
             pCertFlash = &P11ConfigFlashPtr->xDeviceKey;
             xHandle = eAwsDevicePrivateKey;
@@ -169,7 +165,6 @@ CK_OBJECT_HANDLE PKCS11_PAL_SaveObject( CK_ATTRIBUTE_PTR pxLabel,
                               &pkcs11configLABEL_DEVICE_PUBLIC_KEY_FOR_TLS,
                               sizeof( pkcs11configLABEL_DEVICE_PUBLIC_KEY_FOR_TLS ) ) )
         {
-            printf("[%s] log 13\r\n", __func__);
             pCertSave = &P11ConfigSavePtr->xDeviceKey;
             pCertFlash = &P11ConfigFlashPtr->xDeviceKey;
             xHandle = eAwsDevicePublicKey;
@@ -178,7 +173,6 @@ CK_OBJECT_HANDLE PKCS11_PAL_SaveObject( CK_ATTRIBUTE_PTR pxLabel,
                               &pkcs11configLABEL_CODE_VERIFICATION_KEY,
                               sizeof( pkcs11configLABEL_CODE_VERIFICATION_KEY ) ) )
         {
-            printf("[%s] log 14\r\n", __func__);
             pCertSave = &P11ConfigSavePtr->xCodeVerificationKey;
             pCertFlash = &P11ConfigFlashPtr->xCodeVerificationKey;
             xHandle = eAwsCodeSigningKey;
@@ -186,7 +180,6 @@ CK_OBJECT_HANDLE PKCS11_PAL_SaveObject( CK_ATTRIBUTE_PTR pxLabel,
         
         if( pCertSave != 0 )
         {                                           /* can proceed with the write */
-            printf("[%s] log 15\r\n", __func__);
             *P11ConfigSavePtr = *P11ConfigFlashPtr; /* copy the (whole) existent data before erasing flash */
             memcpy( pCertSave->cCertificateData, pucData, ulDataSize );
             pCertSave->ulCertificatePresent = pkcs11OBJECT_FLASH_CERT_PRESENT;
@@ -198,10 +191,8 @@ CK_OBJECT_HANDLE PKCS11_PAL_SaveObject( CK_ATTRIBUTE_PTR pxLabel,
             /* start critical */
             //taskENTER_CRITICAL();
             AWS_UpperBootPage4ProtectionDisable();
-            printf("[%s] log 16\r\n", __func__);
             if(AWS_UpperBootPage4Erase(addr))
             {
-                printf("[%s] log 17\r\n", __func__);
                 /* start writing */
                 for( rowIx = 0; (rowIx < nRows) && bResult; rowIx++ )
                 {
@@ -210,9 +201,7 @@ CK_OBJECT_HANDLE PKCS11_PAL_SaveObject( CK_ATTRIBUTE_PTR pxLabel,
                     pDataSrc += AWS_NVM_ROW_SIZE / sizeof( uint32_t );
                 }
             }
-            printf("[%s] log 18\r\n", __func__);
             
-
             AWS_UpperBootPage4ProtectionEnable();
             addr =  PKCS11_CERTIFICATE_SECTION_START_ADDRESS;
             //taskEXIT_CRITICAL();
@@ -221,12 +210,10 @@ CK_OBJECT_HANDLE PKCS11_PAL_SaveObject( CK_ATTRIBUTE_PTR pxLabel,
             ///if( memcmp( KVA0_TO_KVA1(addr), &P11ConfigSave, sizeof(P11ConfigSave) ) != 0 )
             if( memcmp( pCertFlash, pCertSave, ulDataSize ) != 0 )
             {
-                printf("[%s] log 19\r\n", __func__);
                 xHandle = eInvalidHandle;
             }
         }
     }
-    printf("[%s] log 20\r\n", __func__);
     return xHandle;
 }
 
@@ -251,27 +238,18 @@ CK_OBJECT_HANDLE PKCS11_PAL_FindObject( uint8_t * pLabel,
 {
     CK_OBJECT_HANDLE xHandle = eInvalidHandle;
     const P11CertData_t * pCertFlash = 0;
-    printf("[%s] log 1\r\n", __func__);
     const P11KeyConfig_t * P11ConfigFlashPtr = ( const P11KeyConfig_t * ) KVA0_TO_KVA1( PKCS11_CERTIFICATE_SECTION_START_ADDRESS );
-
-    printf("[%s] log 1 P11ConfigFlashPtr = 0x%p\r\n", __func__, P11ConfigFlashPtr);
     
     /* TODO: Check if object actually exists/has been created before returning. */
     if( 0 == memcmp( pLabel, pkcs11configLABEL_DEVICE_CERTIFICATE_FOR_TLS, usLength )  )
     {
         xHandle = eAwsDeviceCertificate;
                 pCertFlash = &P11ConfigFlashPtr->xDeviceCertificate;
-                printf("[%s]1 val = 0x%x 0x%x \r\n", __func__, P11ConfigFlashPtr->xDeviceCertificate.ulCertificatePresent, P11ConfigFlashPtr->xDeviceCertificate.ulCertificateSize);
-                printf("[%s]1 data = 0x%x 0x%x 0x%x 0x%x 0x%x 0x%x\r\n", __func__, P11ConfigFlashPtr->xDeviceCertificate.cCertificateData[0], P11ConfigFlashPtr->xDeviceCertificate.cCertificateData[1], P11ConfigFlashPtr->xDeviceCertificate.cCertificateData[2], P11ConfigFlashPtr->xDeviceCertificate.cCertificateData[3], P11ConfigFlashPtr->xDeviceCertificate.cCertificateData[4], P11ConfigFlashPtr->xDeviceCertificate.cCertificateData[5]);
-
     }
     else if( 0 == memcmp( pLabel, pkcs11configLABEL_DEVICE_PRIVATE_KEY_FOR_TLS, usLength ) )
     {
         xHandle = eAwsDevicePrivateKey;
                 pCertFlash = &P11ConfigFlashPtr->xDeviceKey;
-                printf("[%s]2 val = 0x%x 0x%x \r\n", __func__, P11ConfigFlashPtr->xDeviceKey.ulCertificatePresent, P11ConfigFlashPtr->xDeviceKey.ulCertificateSize);
-                printf("[%s]2 data = 0x%x 0x%x 0x%x 0x%x 0x%x 0x%x\r\n", __func__, P11ConfigFlashPtr->xDeviceKey.cCertificateData[0], P11ConfigFlashPtr->xDeviceKey.cCertificateData[1], P11ConfigFlashPtr->xDeviceKey.cCertificateData[2], P11ConfigFlashPtr->xDeviceKey.cCertificateData[3], P11ConfigFlashPtr->xDeviceKey.cCertificateData[4], P11ConfigFlashPtr->xDeviceKey.cCertificateData[5]);
-
     }
     else if( 0 == memcmp( pLabel, pkcs11configLABEL_DEVICE_PUBLIC_KEY_FOR_TLS, usLength ) )
     {
@@ -331,7 +309,6 @@ CK_RV PKCS11_PAL_GetObjectValue( CK_OBJECT_HANDLE xHandle,
     uint32_t certSize = 0;
     uint8_t * pCertData = 0;
     const P11CertData_t * pCertFlash = 0;
-    //printf("[%s] log 1, xHandle = %d\r\n", __func__, xHandle);
     const P11KeyConfig_t * P11ConfigFlashPtr = ( const P11KeyConfig_t * ) KVA0_TO_KVA1( PKCS11_CERTIFICATE_SECTION_START_ADDRESS );
     
     if( xHandle == eAwsDeviceCertificate )

@@ -306,23 +306,21 @@ void SYS_Initialize ( void* data )
 
 
 
-	GPIO_Initialize();
+    GPIO_Initialize();
 
-	BSP_Initialize();
+    BSP_Initialize();
     NVM_Initialize();
 
     CORETIMER_Initialize();
-	UART1_Initialize();
+    UART1_Initialize();
 
-	UART2_Initialize();
+    UART2_Initialize();
 
-	RNG_Initialize();
+    RNG_Initialize();
 
-     printf("Test1\r\n");
     /* Initialize the PIC32MZW1 Driver */
     CRYPT_RNG_Initialize(wdrvPIC32MZW1InitData.pCryptRngCtx);
     sysObj.drvWifiPIC32MZW1 = WDRV_PIC32MZW_Initialize(WDRV_PIC32MZW_SYS_IDX_0, (SYS_MODULE_INIT*)&wdrvPIC32MZW1InitData);
-     printf("Test3\r\n");
     
     SYS_CMD_Initialize((SYS_MODULE_INIT*)&sysCmdInit);
 

@@ -359,7 +359,6 @@
         <logicalFolder name="f2" displayName="libraries" projectFiles="true">
           <logicalFolder name="f3" displayName="3rdparty" projectFiles="true">
             <logicalFolder name="f1" displayName="http_parser" projectFiles="true">
-              <itemPath>../../../../../../../libraries/3rdparty/http_parser/.git</itemPath>
               <itemPath>../../../../../../../libraries/3rdparty/http_parser/.mailmap</itemPath>
               <itemPath>../../../../../../../libraries/3rdparty/http_parser/.travis.yml</itemPath>
               <itemPath>../../../../../../../libraries/3rdparty/http_parser/AUTHORS</itemPath>
@@ -526,7 +525,6 @@
               </logicalFolder>
             </logicalFolder>
             <logicalFolder name="f4" displayName="pkcs11" projectFiles="true">
-              <itemPath>../../../../../../../libraries/3rdparty/pkcs11/.git</itemPath>
               <itemPath>../../../../../../../libraries/3rdparty/pkcs11/pkcs11.h</itemPath>
               <itemPath>../../../../../../../libraries/3rdparty/pkcs11/pkcs11f.h</itemPath>
               <itemPath>../../../../../../../libraries/3rdparty/pkcs11/pkcs11t.h</itemPath>
@@ -942,7 +940,6 @@
                                      displayName="pic32mzw1_h3"
                                      projectFiles="true">
                         <itemPath>../../../../../../../libraries/freertos_plus/standard/freertos_plus_tcp/source/portable/NetworkInterface/pic32mzw1_h3/BufferAllocation_2.c</itemPath>
-                        <itemPath>../../../../../../../libraries/freertos_plus/standard/freertos_plus_tcp/source/portable/NetworkInterface/pic32mzw1_h3/NetworkInterface_eth.c</itemPath>
                         <itemPath>../../../../../../../libraries/freertos_plus/standard/freertos_plus_tcp/source/portable/NetworkInterface/pic32mzw1_h3/NetworkInterface_wifi.c</itemPath>
                       </logicalFolder>
                     </logicalFolder>
@@ -1053,11 +1050,7 @@
                   </logicalFolder>
                 </logicalFolder>
                 <logicalFolder name="f2" displayName="ports" projectFiles="true">
-                  <logicalFolder name="f1" displayName="ota" projectFiles="true">
-                    <itemPath>../../../../../../../vendors/microchip/boards/curiosity_pic32mzw1/ports/ota/aws_ota_pal.c</itemPath>
-                  </logicalFolder>
                   <logicalFolder name="f2" displayName="pkcs11" projectFiles="true">
-                    <itemPath>../../../../../../../vendors/microchip/boards/curiosity_pic32mzw1/ports/pkcs11/iot_pkcs11_pal.c</itemPath>
                     <itemPath>../../../../../../../vendors/microchip/boards/curiosity_pic32mzw1/ports/pkcs11/pkcs11_nvm.c</itemPath>
                     <itemPath>../../../../../../../vendors/microchip/boards/curiosity_pic32mzw1/ports/pkcs11/pkcs11_nvm.h</itemPath>
                     <itemPath>../../../../../../../vendors/microchip/boards/curiosity_pic32mzw1/ports/pkcs11/iot_pkcs11_secure_element.c</itemPath>
@@ -1484,7 +1477,7 @@
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>
-    <Elem>../../../../../../..</Elem>
+    <Elem>../src</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -1548,7 +1541,7 @@
         <property key="post-instruction-scheduling" value="default"/>
         <property key="pre-instruction-scheduling" value="default"/>
         <property key="preprocessor-macros"
-                  value="WOLFSSL_IGNORE_FILE_WARN;HAVE_CONFIG_H;__free_rtos__;nPIC32_USE_ETHERNET;PIC32_USE_RIO2_WIFI;UNITY_INCLUDE_CONFIG_H;AMAZON_FREERTOS_ENABLE_UNIT_TESTS;PIC32_USE_ECC;ATCA_TNGTLS_SUPPORT"/>
+                  value="WOLFSSL_IGNORE_FILE_WARN;HAVE_CONFIG_H;__free_rtos__;PIC32_USE_RIO2_WIFI;UNITY_INCLUDE_CONFIG_H;AMAZON_FREERTOS_ENABLE_UNIT_TESTS;PIC32_USE_ECC;ATCA_TNGTLS_SUPPORT"/>
         <property key="strict-ansi" value="false"/>
         <property key="support-ansi" value="false"/>
         <property key="toplevel-reordering" value=""/>
@@ -1834,8 +1827,6 @@
         <property key="memories.programmemory" value="true"/>
         <property key="memories.programmemory.ranges" value="10000000-100fffff"/>
         <property key="poweroptions.powerenable" value="false"/>
-        <property key="programmerToGoFilePath"
-                  value="C:/AFR/amazon-freertos/projects/microchip/curiosity_pic32mzw1_ecc/mplab/aws_tests/firmware/aws_tests.X/debug/aws_tests/aws_tests_ptg"/>
         <property key="programmerToGoImageName" value="aws_tests_ptg"/>
         <property key="programoptions.donoteraseauxmem" value="false"/>
         <property key="programoptions.eraseb4program" value="true"/>
