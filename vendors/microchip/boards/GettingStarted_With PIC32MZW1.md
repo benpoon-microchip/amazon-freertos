@@ -20,7 +20,7 @@ For PIC32 WFI32E Curiosity Board PCB schematics, see Section Appendix B of the [
 
 ### **2.3 Key Components**
 <p align="center">
-<img src="curiosity_board_00.png" width=720>
+<img src="pic32mzw1_curiosity_board.png" width=720>
 </p> 
 
 For a description of key components, jumper settings, LED descriptions and power requirements, see Section 3 in the [PIC32 WFI32E Curiosity Board User's Guide](https://ww1.microchip.com/downloads/en/DeviceDoc/PIC32_WFI32E_Curiosity_Board_User's_Guide.pdf)
@@ -61,7 +61,7 @@ The FreeRTOS project for this device is based on MPLAB Harmony v3. To build the 
 1. Connect the MikroElectronika USB UART click Board to the microBUS connector on the Microchip PIC32 WFI32E Curiosity Board.
 2. Connect the MikroElectronika USB UART click Board to your computer using a USB A to USB mini-B cable.
 <p align="center">
-<img src="icd4_setup_00.png" width=720>
+<img src="icd4_setup.png" width=720>
 </p> 
 
 3. Make sure that J202 jumper is connected to VBUS  
@@ -303,7 +303,7 @@ what is going wrong.
     * If log3 is not print, check that your AWS IoT credentials are valid
 
 <p align="center">
-<img src="debug_log_00.png">
+<img src="pic32mzw1_debug_log.png">
 </p> 
 
 For general troubleshooting information about Getting Started with FreeRTOS, see [Troubleshooting Getting Started](https://docs.aws.amazon.com/freertos/latest/userguide/gsg-troubleshooting.html).
